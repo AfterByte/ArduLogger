@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ArduLogger Test</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/popper.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="/static/js/bootstrap.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8">
+          <main class="row login-container ">
+            <div class="col-12 col-md-6 left-side text-center">
+              <h1 class="mt-5">¡Bienvenido!</h1>
+              <p class="my-4">
+                Esta es una proyecto de prueba para ArduLogger V1.0
+              </p>
+              <small>
+                <b>¿No tienes cuenta?</b>
+                <br>
+              </small>
+              <a class="btn btn-outline-light" href="/signup">Registrarse</a>
+            </div>
+
+
+            <div class="col right-side">
+              <h2 class="mt-5">Iniciar sesión</h2>
+              {% if error %}
+                <div class="alert alert-warning my-3">
+                  {{error}}
+                </div>
+              {% endif%}
+
+              <form class="mt-4" method="post">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" placeholder=" " name="email">
+                  <label for="floatingInput">Correo Electrónico</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" placeholder=" " name="password">
+                  <label for="floatingInput">Contraseña</label>
+                </div>
+                <button class="btn btn-primary d-block" type="submit" name="button">Iniciar sesión</button>
+              </form>
+              <form method="post" id="fingerprint-method">
+                <input type="hidden" name="fingerprint-input" value="" id="fingerprint-input">
+              </form>
+
+              <div class="mt-3 text-center">
+                <p id="fingerprint-msg">O bien, ¡pon tu dedo en el sensor!</p>
+                <p id="error-box"></p>
+                <button id="fingerprint-btn" class="btn-blank" type="button" name="button"><img src="/static/img/fingerprint.png" class="fingerprint" alt=""></button>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+<div class="modal" tabindex="-1" id="incorrectLoginModal" aria-labelledby="incorrectLoginModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">NO SE HA PODIDO ACCEDER</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Parece que tu huella no está registrada o hubo una mala lectura. Intente de nuevo</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var page = "LOGIN"
+</script>
+<script src="/static/js/sockets.js" charset="utf-8"></script>

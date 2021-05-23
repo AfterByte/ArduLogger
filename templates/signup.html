@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ArduLogger Test</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/popper.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="/static/js/bootstrap.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col col-md-8">
+          <main class="row login-container ">
+            <div class="col-12 col-md-4 left-side text-center">
+              <h1 class="mt-5">Registro</h1>
+              <p class="my-4">
+                Rellene todos los campos que se le solicitan
+              </p>
+            </div>
+
+
+            <div class="col right-side">
+              {% if error %}
+                <div class="alert alert-warning my-3">
+                  {{error}}
+                </div>
+              {% endif%}
+              <form class="mt-4" method="post">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" placeholder=" " name="name" required>
+                  <label for="floatingInput">Nombre</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" placeholder=" " name="email" required>
+                  <label for="floatingInput">Correo electrónico</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control" placeholder=" " name="password" required>
+                  <label for="floatingInput">Contraseña</label>
+                </div>
+                <div class="my-3 text-center">
+                  <p id="fingerprint-msg">¡Pon tu dedo en el sensor!</p>
+                  <button id="fingerprint-btn" class="btn btn-danger" type="button" name="button"><img style="width: 80px;"src="/static/img/fingerprint.png" class="fingerprint" alt=""></button>
+                </div>
+                <input type="hidden" id="fingerprint-input" class="form-control" placeholder=" " name="fingerprint" required>
+                <button id="submit-btn" class="btn btn-primary d-block" type="submit" name="button" disabled>Registrarse</button>
+              </form>
+
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+<div class="modal" tabindex="-1" id="incorrectLoginModal" aria-labelledby="incorrectLoginModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">NO SE HA PODIDO ACCEDER</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Parece que tu huella no está registrada o hubo una mala lectura. Intente de nuevo</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var page = "SIGNUP"
+</script>
+
+<script src="/static/js/sockets.js" charset="utf-8"></script>
